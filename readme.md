@@ -1,4 +1,4 @@
-#HTML drag and Drop game for richest people
+# HTML drag and Drop game for richest people
 
 This is a small vanila javascript sorting game.
 
