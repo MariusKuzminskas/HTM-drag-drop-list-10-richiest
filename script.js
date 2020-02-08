@@ -99,5 +99,19 @@ function dragEnter() {
 function dragLeave() {
   // console.log('Event', 'dragLeave')
   this.classList.remove('over')
+}
 
+check.addEventListener('click', checkOrder)
+
+function checkOrder() {
+  listItems.forEach((listItem, index) => {
+    const personName = listItem.querySelector('.draggable').innerText.trim();
+
+    if (personName !== richestPeople[index]) {
+      listItem.classList.add('wrong')
+    } else {
+      listItem.classList.remove('wrong')
+      listItem.classList.add('right')
+    }
+  })
 }
