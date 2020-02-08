@@ -45,5 +45,59 @@ function createList() {
       listItems.push(listItemEl)
       draggableList.appendChild(listItemEl)
     })
+  addEventListeners();
 }
-// console.log(listItems);
+
+function addEventListeners() {
+  const draggables = document.querySelectorAll('.draggable');
+  const dragListItem = document.querySelectorAll('.draggable-list li');
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', dragStart)
+  })
+  dragListItem.forEach(item => {
+    item.addEventListener('dragover', dragOver)
+    item.addEventListener('drop', dragDrop)
+    item.addEventListener('dragenter', dragEnter)
+    item.addEventListener('dragleave', dragLeave)
+  })
+}
+
+function dragStart() {
+  // console.log('Event', 'dragStart')
+  dragStartIndex = +this.closest('li').getAttribute('data-index');
+  // console.log(dragStartIndex)
+}
+
+function swapItems(fromIndex, toIndex) {
+  console.log('swap')
+  const itemOne = listItems[fromIndex].querySelector('.draggable')
+  const itemTwo = listItems[toIndex].querySelector('.draggable')
+
+  listItems[fromIndex].appendChild(itemTwo);
+  listItems[toIndex].appendChild(itemOne);
+
+}
+
+function dragOver(e) {
+  // console.log('Event', 'dragOver')
+  e.preventDefault();
+}
+
+function dragDrop() {
+  // console.log('Event', 'dragDrop')
+  const dragEndIndex = +this.getAttribute('data-index');
+  swapItems(dragStartIndex, dragEndIndex);
+  this.classList.remove('over')
+}
+
+function dragEnter() {
+  // console.log('Event', 'dragEnter')
+  this.classList.add('over')
+}
+
+function dragLeave() {
+  // console.log('Event', 'dragLeave')
+  this.classList.remove('over')
+
+}
